@@ -13,4 +13,3 @@ rules:
     max-spaces-inside: 0
   indentation:
     indent-sequences: consistent
-

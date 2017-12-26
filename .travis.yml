@@ -28,9 +28,9 @@ script:
       fi
      done
   # Check YAML styling
-  - yamllint -c .yamllint.yml -s .travis.yml .yamllint.yml
-  - yamllint -c .yamllint.yml -s $(find . -type f -name "Chart.yaml")
-  - yamllint -c .yamllint.yml -s $(find . -type f -name "values.yaml")
+  - yamllint -c .yamllint.yml .travis.yml .yamllint.yml
+  - yamllint -c .yamllint.yml $(find . -type f -name "Chart.yaml")
+  - yamllint -c .yamllint.yml $(find . -type f -name "values.yaml")
 
 after_success:
   # nothing

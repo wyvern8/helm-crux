@@ -1,3 +1,4 @@
+---
 {{- if .Values.ingress.enabled -}}
 {{- $serviceName := include "gtm-agent.fullname" . -}}
 {{- $servicePort := .Values.service.externalPort -}}

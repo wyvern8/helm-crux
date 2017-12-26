@@ -1,0 +1,36 @@
+---
+language: python
+
+env:
+  global:
+    - HELM_URL=https://storage.googleapis.com/kubernetes-helm
+    - HELM_TGZ=helm-v2.7.2-linux-amd64.tar.gz
+    - REPO_DIR=/home/travis/build/wyvern8/helm-crux
+    - YAMLLINT_VERSION=1.10.0
+
+install:
+  - wget -q ${HELM_URL}/${HELM_TGZ}
+  - tar xzfv ${HELM_TGZ}
+  - PATH=`pwd`/linux-amd64/:$PATH
+  - helm init --client-only
+  - sudo pip install yamllint=="${YAMLLINT_VERSION}"
+
+before_script:
+  # nothing
+
+script:
+  # Check charts format
+  - >
+     for dir in `ls ${REPO_DIR}/charts`; do
+      helm lint ${REPO_DIR}/charts/$dir
+      if [ $? != 0 ]; then
+       travis_terminate 1
+      fi
+     done
+  # Check YAML styling
+  - yamllint -c .yamllint.yml -s .travis.yml .yamllint.yml
+  - yamllint -c .yamllint.yml -s $(find . -type f -name "Chart.yaml")
+  - yamllint -c .yamllint.yml -s $(find . -type f -name "values.yaml")
+
+after_success:
+  # nothing

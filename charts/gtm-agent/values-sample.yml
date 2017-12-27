@@ -1,0 +1,57 @@
+---
+# Default values for gtm-agent.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+env:
+  DOCKER_HOST: tcp://localhost:2375
+  GTM_AWS_REGION: ${GTM_AWS_REGION}
+  GTM_SQS_PENDING_QUEUE: ${GTM_SQS_PENDING_QUEUE}
+  GTM_SQS_RESULTS_QUEUE: ${GTM_SQS_RESULTS_QUEUE}
+  GTM_SNS_RESULTS_TOPIC: ${GTM_SNS_RESULTS_TOPIC}
+  GTM_GITHUB_WEBHOOK_SECRET: ${GTM_GITHUB_WEBHOOK_SECRET}
+  GTM_AGENT_PORT: "${GTM_AGENT_PORT}"
+  GTM_AGENT_GROUP: ${GTM_AGENT_GROUP}
+  GTM_AGENT_CLOUDWATCH_LOGS_GROUP: ${GTM_AGENT_CLOUDWATCH_LOGS_GROUP}
+  GTM_AGENT_AWS_ACCESS_KEY_ID: ${GTM_AGENT_AWS_ACCESS_KEY_ID}
+  GTM_AGENT_AWS_SECRET_ACCESS_KEY: ${GTM_AGENT_AWS_SECRET_ACCESS_KEY}
+
+replicaCount: 2
+image:
+  repository: wyvern8/github-task-manager
+  tag: latest
+  pullPolicy: Always
+  envConfigMapName: gtm-agent-configmap
+
+dockerInDocker:
+  enabled: true
+
+service:
+  name: gtm-agent
+  type: NodePort
+  externalPort: 9091
+  internalPort: 9091
+ingress:
+  enabled: true
+  # Used to create an Ingress record.
+  hosts:
+    - gtm.k8s.com.au
+  annotations:
+    kubernetes.io/ingress.class: gce
+    kubernetes.io/tls-acme: "true"
+    kubernetes.io/ingress.global-static-ip-name: kubernetes-ingress
+  tls:
+    - hosts:
+        - gtm.k8s.com.au
+      secretName: gtm-agent-tls
+
+resources:
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #  cpu: 100m
+  #  memory: 128Mi
+  requests:
+    cpu: 50m
+    memory: 128Mi

@@ -25,5 +25,8 @@ dist/
 
 *.out
 
-# helm values
+# helm related yaml conf
 values.yml
+values.yaml
+values.gen.yml
+values.gen.yaml

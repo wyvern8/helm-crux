@@ -20,6 +20,9 @@ spec:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          envFrom:
+            - configMapRef:
+                name: {{ .Values.image.envConfigMapName }}
           ports:
             - containerPort: {{ .Values.service.internalPort }}
           livenessProbe:
@@ -32,6 +35,21 @@ spec:
               port: {{ .Values.service.internalPort }}
           resources:
 {{ toYaml .Values.resources | indent 12 }}
+
+        {{- if .Values.dockerInDocker.enabled }}
+        - name: docker-in-docker
+          image: docker:dind
+          resources:
+            limits:
+              memory: 500Mi
+            requests:
+              cpu: 25m
+          securityContext:
+            privileged: true
+          ports:
+            - containerPort: 2375
+        {{- end }}
+
     {{- if .Values.nodeSelector }}
       nodeSelector:
 {{ toYaml .Values.nodeSelector | indent 8 }}

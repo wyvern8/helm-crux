@@ -1,0 +1,17 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: gtm-agent-configmap
+data:
+  DOCKER_HOST: {{ .Values.env.DOCKER_HOST }}
+  GTM_AWS_REGION: {{ .Values.env.GTM_AWS_REGION }}
+  GTM_SQS_PENDING_QUEUE: {{ .Values.env.GTM_SQS_PENDING_QUEUE }}
+  GTM_SQS_RESULTS_QUEUE: {{ .Values.env.GTM_SQS_RESULTS_QUEUE }}
+  GTM_SNS_RESULTS_TOPIC: {{ .Values.env.GTM_SNS_RESULTS_TOPIC }}
+  GTM_GITHUB_WEBHOOK_SECRET: {{ .Values.env.GTM_GITHUB_WEBHOOK_SECRET }}
+  GTM_AGENT_PORT: {{ .Values.env.GTM_AGENT_PORT | quote }}
+  GTM_AGENT_GROUP: {{ .Values.env.GTM_AGENT_GROUP }}
+  GTM_AGENT_CLOUDWATCH_LOGS_GROUP: {{ .Values.env.GTM_AGENT_CLOUDWATCH_LOGS_GROUP }}
+  GTM_AGENT_AWS_ACCESS_KEY_ID: {{ .Values.env.GTM_AGENT_AWS_ACCESS_KEY_ID }}
+  GTM_AGENT_AWS_SECRET_ACCESS_KEY: {{ .Values.env.GTM_AGENT_AWS_SECRET_ACCESS_KEY }}

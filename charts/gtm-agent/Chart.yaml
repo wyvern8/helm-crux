@@ -1,5 +1,11 @@
 ---
 apiVersion: v1
-description: Deploy github-task-manager agents
 name: gtm-agent
-version: 0.1.0
+version: 0.1.2
+description: github-task-manager agents
+sources:
+- https://github.com/wyvern8/github-task-manager
+maintainers:
+- name: wyvern8
+  email: andrewv@smartcreations.com.au
+icon: https://storage.googleapis.com/github-bin/gtm-logo.svg

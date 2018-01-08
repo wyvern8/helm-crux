@@ -1,3 +1,4 @@
+---
 # https://raw.githubusercontent.com/kubernetes/charts/master/stable/kube-lego/values.yaml
 
 ## kube-lego configuration
@@ -55,12 +56,12 @@ replicaCount: 1
 ## Ref: https://kubernetes.io/docs/user-guide/compute-resources/
 ##
 resources: {}
-  # limits:
-  #   cpu: 20m
-  #   memory: 8Mi
-  # requests:
-  #   cpu: 20m
-  #   memory: 8Mi
+# limits:
+#   cpu: 20m
+#   memory: 8Mi
+# requests:
+#   cpu: 20m
+#   memory: 8Mi
 
 rbac:
   create: false

@@ -15,8 +15,7 @@ install:
   - helm init --client-only
   - sudo pip install yamllint=="${YAMLLINT_VERSION}"
 
-before_script:
-  # nothing
+before_script: # nothing
 
 script:
   # Check charts format
@@ -33,5 +32,4 @@ script:
   - yamllint -c .yamllint.yml $(find . -type f -name "Chart.yaml")
   - yamllint -c .yamllint.yml $(find . -type f -name "values.yaml")
 
-after_success:
-  # nothing
+after_success: # nothing

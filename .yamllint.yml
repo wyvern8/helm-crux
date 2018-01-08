@@ -3,13 +3,14 @@ extends: default
 rules:
   comments:
     min-spaces-from-content: 1
+  comments-indentation: {}
   line-length:
     max: 150
   braces:
     min-spaces-inside: 0
-    max-spaces-inside: 0
+    max-spaces-inside: -1
   brackets:
     min-spaces-inside: 0
-    max-spaces-inside: 0
+    max-spaces-inside: -1
   indentation:
     indent-sequences: consistent

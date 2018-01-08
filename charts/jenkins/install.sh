@@ -1,3 +1,5 @@
 #!/bin/bash
 
-helm install --name jenkins -f ./values.yaml stable/jenkins | tee jenkins.out
+# https://hub.kubeapps.com/charts/stable/jenkins
+
+helm install --name jenkins stable/jenkins | tee jenkins.out

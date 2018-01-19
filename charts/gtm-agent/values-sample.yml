@@ -34,14 +34,13 @@ ingress:
   enabled: true
   # Used to create an Ingress record.
   hosts:
-    - gtm.k8s.com.au
+    - gtm.your.domain.com
   annotations:
-    kubernetes.io/ingress.class: gce
+    kubernetes.io/ingress.class: nginx
     kubernetes.io/tls-acme: "true"
-    kubernetes.io/ingress.global-static-ip-name: kubernetes-ingress
   tls:
     - hosts:
-        - gtm.k8s.com.au
+        - gtm.your.domain.com
       secretName: gtm-agent-tls
 
 resources:
